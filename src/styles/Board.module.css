@@ -1,0 +1,32 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  width: 480px;
+  height: 480px;
+  border: 4px solid #333;
+  background: #d2b48c;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+}
+.row {
+  display: flex;
+  flex: 1;
+}
+.square {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.light {
+  background: #f0d9b5;
+}
+.dark {
+  background: #b58863;
+}
+.selected {
+  outline: 3px solid #2196f3;
+  z-index: 2;
+} 

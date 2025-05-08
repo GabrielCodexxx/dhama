@@ -1,0 +1,30 @@
+.piece {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  border: 3px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.white {
+  background: linear-gradient(145deg, #fff 60%, #e0e0e0 100%);
+}
+.black {
+  background: linear-gradient(145deg, #7b3f00 60%, #4b2e05 100%);
+}
+.king {
+  box-shadow: 0 0 0 4px gold, 0 2px 8px rgba(0,0,0,0.2);
+  position: relative;
+}
+.king::after {
+  content: "K";
+  color: gold;
+  font-weight: bold;
+  font-size: 1.2em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} 
