@@ -50,7 +50,7 @@ export function makeMove(
   from: { row: number; col: number },
   to: { row: number; col: number }
 ): BoardState {
-  const newBoard = board.map(row => [...row]);
+  const newBoard = board.map((row: PieceType[]) => [...row]);
   const piece = newBoard[from.row][from.col];
   newBoard[from.row][from.col] = null;
   newBoard[to.row][to.col] = piece;
@@ -68,8 +68,8 @@ export function makeMove(
 
 export function getWinner(board: BoardState): 'w' | 'b' | null {
   let w = 0, b = 0;
-  for (let row of board) {
-    for (let cell of row) {
+  for (const row of board) {
+    for (const cell of row) {
       if (cell && cell[0] === 'w') w++;
       if (cell && cell[0] === 'b') b++;
     }

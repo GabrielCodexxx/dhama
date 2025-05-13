@@ -4,12 +4,13 @@ import Board from '../components/Board';
 import ModeSelector from '../components/ModeSelector';
 import { getInitialBoard, isValidMove, makeMove, getWinner } from '../lib/gameLogic';
 import { getAIMove, getExtremeAIMove } from '../lib/ai';
-import { BoardState, PieceType } from '../lib/types';
+import { BoardState } from '../lib/types';
+import styles from '../styles/Home.module.css';
 
 const MOVE_TIME_LIMIT = 10; // seconds
 
 const HomePage = () => {
-  const [mode, setMode] = useState<'solo' | '2p' | 'extreme'>('2p');
+  const [mode, setMode] = useState<'solo' | '2p' | 'extreme'>('solo');
   const [board, setBoard] = useState<BoardState>(getInitialBoard());
   const [turn, setTurn] = useState<'w' | 'b'>('w');
   const [selected, setSelected] = useState<{ row: number; col: number } | null>(null);
@@ -129,10 +130,15 @@ const HomePage = () => {
     setTimer(MOVE_TIME_LIMIT);
   };
 
+  const handleModeChange = (newMode: 'solo' | '2p' | 'extreme') => {
+    setMode(newMode);
+    handleRestart();
+  };
+
   return (
     <main style={{ minHeight: '100vh', background: '#f5f5f5', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
       <h1 style={{ fontSize: 40, fontWeight: 800, margin: '32px 0 8px', color: '#333' }}>Gabriel Dama Tournament</h1>
-      <ModeSelector mode={mode} setMode={setMode} />
+      <ModeSelector mode={mode} setMode={handleModeChange} />
       <div style={{ marginBottom: 16, fontSize: 20, fontWeight: 600, color: '#444' }}>
         {winner ? (
           <span style={{ color: winner === 'w' ? '#2196f3' : '#7b3f00' }}>{winner === 'w' ? 'White' : 'Black'} wins!</span>

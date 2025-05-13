@@ -1,6 +1,6 @@
 "use client";
 
-import { BoardState, PieceType } from './types';
+import { BoardState } from './types';
 import { isValidMove, makeMove } from './gameLogic';
 
 export function getAIMove(board: BoardState, player: 'w' | 'b') {
@@ -33,8 +33,8 @@ export function getAIMove(board: BoardState, player: 'w' | 'b') {
 function evaluateBoard(board: BoardState, player: 'w' | 'b'): number {
   // Simple evaluation: +3 for each own king, +1 for each own piece, -3 for opponent king, -1 for opponent piece
   let score = 0;
-  for (let row of board) {
-    for (let cell of row) {
+  for (const row of board) {
+    for (const cell of row) {
       if (cell) {
         if (cell[0] === player) {
           score += cell.length === 2 ? 3 : 1;
@@ -72,7 +72,7 @@ function getAllMoves(board: BoardState, player: 'w' | 'b') {
   return moves;
 }
 
-function minimax(board: BoardState, player: 'w' | 'b', depth: number, maximizing: boolean): { score: number, move: any } {
+function minimax(board: BoardState, player: 'w' | 'b', depth: number, maximizing: boolean): { score: number, move: { from: { row: number; col: number }; to: { row: number; col: number } } | null } {
   if (depth === 0) {
     return { score: evaluateBoard(board, player), move: null };
   }
@@ -80,7 +80,7 @@ function minimax(board: BoardState, player: 'w' | 'b', depth: number, maximizing
   if (moves.length === 0) {
     return { score: maximizing ? -Infinity : Infinity, move: null };
   }
-  let bestMove = null;
+  let bestMove: { from: { row: number; col: number }; to: { row: number; col: number } } | null = null;
   let bestScore = maximizing ? -Infinity : Infinity;
   for (const move of moves) {
     const newBoard = makeMove(board, move.from, move.to);
